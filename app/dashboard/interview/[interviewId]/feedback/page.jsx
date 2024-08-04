@@ -39,7 +39,7 @@ function Feedback({ params }) {
       {
         feedbackList?.length==0? <h2 className="font-bold text-xl text-gray-500">No Interview Feedback Record Found</h2> :
         <>
-         <h2 className="text-3xl font-bold text-green-500">Congratulation!</h2>
+         <h2 className="text-3xl font-bold text-green-500">Amezing...!</h2>
          <h2 className="font-bold text-2xl">Here is your interview feedback</h2>
         <h2 className="text-primary text-lg my-3">
         Your overall interview rating <strong  className={avgRating<6?'text-red-600':'text-green-500'} >{avgRating}/10</strong>

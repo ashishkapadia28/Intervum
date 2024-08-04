@@ -6,7 +6,6 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -28,7 +27,8 @@ function AddNewInterview() {
   const [loading, setLoading] = useState(false);
   const [JsonResponse, setJsonResponse] = useState([]);
   const { user } = useUser();
-  const route=useRouter()
+  const route = useRouter();
+
   const onSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
@@ -39,10 +39,12 @@ function AddNewInterview() {
       .text()
       .replace("```json", "")
       .replace("```", "");
-    //console.log(JSON.parse(MockJsonResp))
-    setJsonResponse(JSON.parse(MockJsonResp));
-   if(MockJsonResp){
-    const resp = await db.insert(MockInterview).values({
+
+    try {
+      const parsedResponse = JSON.parse(MockJsonResp);
+      setJsonResponse(parsedResponse);
+
+      const resp = await db.insert(MockInterview).values({
         mockId: uuidv4(),
         jsonMockResp: MockJsonResp,
         jobPosition: jobPosition,
@@ -50,24 +52,20 @@ function AddNewInterview() {
         jobExperience: jobExperience,
         createdBy: user?.primaryEmailAddress?.emailAddress,
         createdAt: moment().format("DD-MM-yyyy"),
-      }).returning({mockId:MockInterview.mockId})
-      console.log("Insert ID:", resp)
-      if(resp){
-       route.push('/dashboard/interview/'+resp[0].mockId)
-        setOpenDialog(false)
+      }).returning({ mockId: MockInterview.mockId });
+
+      console.log("Insert ID:", resp);
+
+      if (resp) {
+        route.push('/dashboard/interview/' + resp[0].mockId);
+        setOpenDialog(false);
       }
-    
+    } catch (error) {
+      console.error("Error parsing JSON response or inserting data:", error);
+    }
 
-   }else{
-    console.log("ERROR")
-   }
-
-   setLoading(false);
-   console.log(JsonResponse)
-   
-
-
-
+    setLoading(false);
+    console.log(JsonResponse);
   };
 
   return (
@@ -87,12 +85,10 @@ function AddNewInterview() {
             <DialogDescription>
               <form onSubmit={onSubmit}>
                 <div>
-                  {/* <h2>Tell us more about your job interviewing</h2> */}
                   <h2>
                     Add Details about your job position/role, Job description
                     and years of experience
                   </h2>
-
                   <div className="mt-7 my-3">
                     <label>Job Role/Job Position</label>
                     <Input
@@ -120,7 +116,6 @@ function AddNewInterview() {
                     />
                   </div>
                 </div>
-
                 <div className="flex gap-5 justify-end">
                   <Button
                     type="button"

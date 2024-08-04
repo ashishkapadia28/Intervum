@@ -1,8 +1,22 @@
-/** @type { import("drizzle-kit").Config } */
-export default {
-    schema: "./utils/schema.js",
-    dialect: 'postgresql',
-    dbCredentials: {
-      url: 'postgresql://neondb_owner:3tULYM2vKqVb@ep-ancient-lab-a1ip24ct.ap-southeast-1.aws.neon.tech/MockInterviewTool?sslmode=require',
-    }
-  };
+import { defineConfig } from "drizzle-kit";
+
+export default defineConfig({
+  schema: "./utils/schema.js",
+  out: "./migrations",
+  dialect: "postgresql",
+  dbCredentials: {
+    url: process.env.NEXT_PUBLIC_DRIZZLE_DB_URL,
+    ssl: false,
+  },
+  verbose: true,
+  strict: true,
+});
+
+// /** @type { import("drizzle-kit").Config } */
+// export default {
+//   schema: "./utils/schema.js",
+//   dialect: 'postgresql',
+//   dbCredentials: {
+//     url: process.env.NEXT_PUBLIC_DRIZZLE_DB_URL,
+//   }
+// };

@@ -1,0 +1,9 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Explicitly set the line ending for specific files
+*.conf text eol=lf
+*.pid text eol=lf
+*.opts text eol=lf
+*.sql text eol=lf
+*.json text eol=lf
