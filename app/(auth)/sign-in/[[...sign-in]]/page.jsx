@@ -38,7 +38,7 @@ export default function Page() {
             </a>
 
             <h2 class="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
-              Welcome to AI Interview Mocker 🦑
+              Welcome to AI Intervum 🦑
             </h2>
 
             <p class="mt-4 leading-relaxed text-white/90">
@@ -70,7 +70,7 @@ export default function Page() {
               </a>
 
               <h1 class="mt-2 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl dark:text-white">
-                Welcome to AI Interview Mocker 🦑
+              Welcome to AI Intervum 🦑
               </h1>
 
               <p class="mt-4 leading-relaxed text-gray-500 dark:text-gray-400">
